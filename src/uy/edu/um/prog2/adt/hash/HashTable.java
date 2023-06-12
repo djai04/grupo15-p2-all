@@ -1,5 +1,7 @@
 package uy.edu.um.prog2.adt.hash;
 
+import static java.lang.Math.abs;
+
 public class HashTable<K, V> implements IHashTable<K, V> {
 
     // El atributo table es un array estatico donde guardamos todos los elementos, y la capacity es el largo del array.
@@ -26,9 +28,9 @@ public class HashTable<K, V> implements IHashTable<K, V> {
     // Function para conseguir el hash de la clave.
     public int getHash(K key) {
         if (this.HASH_FUNCTION == "default") {
-            return key.hashCode() % this.capacity;
+            return abs(key.hashCode() % this.capacity);
         } else {
-            return key.hashCode() % this.capacity;
+            return abs(key.hashCode() % this.capacity);
         }
     }
 

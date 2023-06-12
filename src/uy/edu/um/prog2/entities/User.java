@@ -8,7 +8,7 @@ public class User {
 
     private boolean isVerified;
 
-    private long amountOfFavourites;
+    private double amountOfFavourites;
 
     private LinkedList<Tweet> userTweets;
 
@@ -21,7 +21,7 @@ public class User {
     }
 
 
-    public User(String username, boolean isVerified, long amountOfFavourites) {
+    public User(String username, boolean isVerified, double amountOfFavourites) {
         this.username = username;
         this.isVerified = isVerified;
         this.amountOfFavourites = amountOfFavourites;
@@ -44,7 +44,7 @@ public class User {
         isVerified = verified;
     }
 
-    public long getAmountOfFavourites() {
+    public double getAmountOfFavourites() {
         return amountOfFavourites;
     }
 
