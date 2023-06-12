@@ -26,3 +26,4 @@ replay_pid*
 # lib and dataset directory
 /lib
 /dataset
+/.idea
