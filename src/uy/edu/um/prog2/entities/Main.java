@@ -4,6 +4,7 @@ import uy.edu.um.prog2.adt.hash.HashTable;
 import uy.edu.um.prog2.adt.linkedlist.LinkedList;
 
 import java.io.IOException;
+import java.sql.SQLOutput;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -16,5 +17,6 @@ public class Main {
 
         User givenUser = userList.get("Chris Hawkins");
         System.out.println(givenUser.getUserTweets().get(2).getContent());
+        System.out.println(givenUser.getUserTweets().get(2).getId());
     }
 }

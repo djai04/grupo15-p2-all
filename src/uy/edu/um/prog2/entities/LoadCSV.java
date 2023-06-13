@@ -35,8 +35,6 @@ public class LoadCSV {
                     continue;
                 }
 
-                String tweetId = record.get(0);
-
                 String userName = record.get(1);
 
                 String userFavourites = record.get(7);
@@ -88,7 +86,7 @@ public class LoadCSV {
                 Date tweetDateObject = null;
                 tweetDateObject = formatter.parse(tweetDate);
 
-                Tweet currentTweet = new Tweet(Long.valueOf(tweetId), tweetText, tweetSource, isRetweetBoolean, tweetDateObject, currentUser);
+                Tweet currentTweet = new Tweet(tweetText, tweetSource, isRetweetBoolean, tweetDateObject, currentUser);
                 currentTweet.setHashtags(tweetHastagsInLL);
 
                 if (allUsers.contains(currentUser.getUsername())) {

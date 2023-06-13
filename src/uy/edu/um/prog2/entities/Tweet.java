@@ -5,6 +5,7 @@ import uy.edu.um.prog2.adt.linkedlist.LinkedList;
 import java.util.Date;
 
 public class Tweet {
+    private static long nextID = 1;
     private long id;
     private String content;
     private String source;
@@ -33,14 +34,15 @@ public class Tweet {
 
 
 
-    public Tweet(long id, String content, String source, boolean isRetweet, Date date, User author) {
-        this.id = id;
+    public Tweet(String content, String source, boolean isRetweet, Date date, User author) {
+        this.id = nextID;
         this.content = content;
         this.source = source;
         this.isRetweet = isRetweet;
         this.date = date;
         this.author=author;
         this.hashtags= new LinkedList<>();
+        nextID++;
     }
 
     public long getId() {

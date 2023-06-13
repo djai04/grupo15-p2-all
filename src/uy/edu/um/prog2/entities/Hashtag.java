@@ -4,9 +4,7 @@ import uy.edu.um.prog2.adt.linkedlist.LinkedList;
 
 public class Hashtag {
 
-    private long id;
-
-    private String text;
+    private String tag;
 
     private LinkedList<Tweet> tweets;
 
@@ -19,26 +17,17 @@ public class Hashtag {
     }
 
 
-    public Hashtag(long id, String text) {
-        this.id = id;
-        this.text = text;
+    public Hashtag(String tag) {
+        this.tag = tag;
         this.tweets= new LinkedList<>();
     }
 
-    public long getId() {
-        return id;
+    public String getTag() {
+        return tag;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 
 
