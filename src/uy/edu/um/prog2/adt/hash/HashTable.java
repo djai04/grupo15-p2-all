@@ -192,4 +192,14 @@ public class HashTable<K, V> implements IHashTable<K, V> {
             return position + 1;
         }
     }
+
+    public int length() {
+        int length = 0;
+        for (int i = 0; i < this.table.length; i++) {
+            if (this.table[i] != null) {
+                length++;
+            }
+        }
+        return length;
+    }
 }

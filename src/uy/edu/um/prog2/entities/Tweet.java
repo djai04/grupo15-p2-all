@@ -13,14 +13,14 @@ public class Tweet {
     private Date date;
 
     private User author;
-    private LinkedList<String> hashtags;
+    private LinkedList<Hashtag> hashtags;
 
 
-    public LinkedList<String> getHashtags() {
+    public LinkedList<Hashtag> getHashtags() {
         return hashtags;
     }
 
-    public void setHashtags(LinkedList<String> hashtags) {
+    public void setHashtags(LinkedList<Hashtag> hashtags) {
         this.hashtags = hashtags;
     }
 

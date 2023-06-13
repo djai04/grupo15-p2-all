@@ -21,7 +21,7 @@ public class LoadCSV {
 
     }
 
-    public static void loadDataIntoList(HashTable<String, User> allUsers, HashTable<Long, Tweet> allTweets, HashTable<String, Driver> allDrivers) throws IOException {
+    public static void loadDataIntoList(HashTable<String, User> allUsers, HashTable<Long, Tweet> allTweets, HashTable<String, Driver> allDrivers, HashTable<String, Hashtag> allHashtags) throws IOException {
         Reader in = new FileReader("dataset/f1_dataset_test.csv");
         Iterable<CSVRecord> records = CSVFormat.EXCEL.parse(in);
         int counter = 0;
@@ -47,7 +47,6 @@ public class LoadCSV {
                 String tweetText = record.get(10);
 
                 String tweetHashtags = record.get(11);
-                LinkedList<String> tweetHastagsInLL = new LinkedList<>();
 
                 String tweetSource = record.get(12);
 
@@ -72,34 +71,40 @@ public class LoadCSV {
                     isRetweetBoolean = true;
                 }
 
-                //  Validate tweetHashtags
-                //  Should be a linked list of type Hashtag
-                tweetHashtags = tweetHashtags.replace("[", "").replace("]", "").replace("'", "").replace(" ", "");
-                String[] tweetHashtagsInArray = tweetHashtags.split(",");
-
-                for (int i = 0; i < tweetHashtagsInArray.length; i++) {
-                    tweetHastagsInLL.add(tweetHashtagsInArray[i]);
-                }
-
                 //  Validate tweetDate
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date tweetDateObject = null;
                 tweetDateObject = formatter.parse(tweetDate);
 
                 Tweet currentTweet = new Tweet(tweetText, tweetSource, isRetweetBoolean, tweetDateObject, currentUser);
-                currentTweet.setHashtags(tweetHastagsInLL);
+
+                //  Validate tweetHashtags
+                //  Should be a linked list of type Hashtag
+                tweetHashtags = tweetHashtags.replace("[", "").replace("]", "").replace("'", "").replace(" ", "");
+                String[] tweetHashtagsInArray = tweetHashtags.split(",");
+
+                for (int i = 0; i < tweetHashtagsInArray.length; i++) {
+                    Hashtag currentHashtag =  new Hashtag(tweetHashtagsInArray[i].toLowerCase());
+
+                    if (allHashtags.contains(currentHashtag.getTag())) {
+                        currentHashtag = allHashtags.get(currentHashtag.getTag());
+                        currentHashtag.getTweets().add(currentTweet);
+                    } else {
+                        currentHashtag.getTweets().add(currentTweet);
+                        allHashtags.put(currentHashtag.getTag(), currentHashtag);
+                    }
+                    // Debemos argumentar en el readme
+                    currentTweet.getHashtags().add(currentHashtag);
+                }
+
 
                 if (allUsers.contains(currentUser.getUsername())) {
                     User foundUser = allUsers.get(currentUser.getUsername());
                     foundUser.getUserTweets().add(currentTweet);
-                    allTweets.put(currentTweet.getId(), currentTweet);
-                    counter++;
-                    continue;
+                } else {
+                    currentUser.getUserTweets().add(currentTweet);
+                    allUsers.put(currentUser.getUsername(), currentUser);
                 }
-
-                currentUser.getUserTweets().add(currentTweet);
-
-                allUsers.put(currentUser.getUsername(), currentUser);
 
                 allTweets.put(currentTweet.getId(), currentTweet);
 

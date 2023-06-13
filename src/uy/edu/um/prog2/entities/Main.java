@@ -12,11 +12,15 @@ public class Main {
         HashTable<String, User> userList = new HashTable<>(100000);
         HashTable<Long, Tweet> tweetList = new HashTable<>(100000);
         HashTable<String, Driver> driverList = new HashTable<>(50);
+        HashTable<String, Hashtag> hashtagList = new HashTable<>(100000);
 
-        LoadCSV.loadDataIntoList(userList, tweetList, driverList);
+        LoadCSV.loadDataIntoList(userList, tweetList, driverList, hashtagList);
 
         User givenUser = userList.get("Chris Hawkins");
         System.out.println(givenUser.getUserTweets().get(2).getContent());
+        System.out.println(givenUser.getUserTweets().get(2).getHashtags().get(0).getTag());
         System.out.println(givenUser.getUserTweets().get(2).getId());
+
+        System.out.println(userList.length());
     }
 }

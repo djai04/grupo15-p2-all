@@ -8,6 +8,11 @@ public class Hashtag {
 
     private LinkedList<Tweet> tweets;
 
+    public Hashtag(String tag) {
+        this.tag = tag;
+        this.tweets= new LinkedList<>();
+    }
+
     public LinkedList<Tweet> getTweets() {
         return tweets;
     }
@@ -16,11 +21,6 @@ public class Hashtag {
         this.tweets = tweets;
     }
 
-
-    public Hashtag(String tag) {
-        this.tag = tag;
-        this.tweets= new LinkedList<>();
-    }
 
     public String getTag() {
         return tag;
