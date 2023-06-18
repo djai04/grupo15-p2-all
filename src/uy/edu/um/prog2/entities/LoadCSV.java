@@ -24,16 +24,16 @@ public class LoadCSV {
 
     }
 
-    public static void loadDataIntoList(HashTable<String, User> allUsers, HashTable<Long, Tweet> allTweets, HashTable<String, Driver> allDrivers, HashTable<String, Hashtag> allHashtags) throws IOException {
+    public static void loadDataIntoList(HashTable<String, User> allUsers, HashTable<Long, Tweet> allTweets, HashTable<Long, Driver> allDrivers, HashTable<String, Hashtag> allHashtags) throws IOException {
         // Create file
-        File file =new File("dataset/drivers.text");
+        File file =new File("dataset/drivers.txt");
         Scanner scanner= new Scanner(file);
         // Create drivers
         int id=1;
         while(scanner.hasNextLine()){
             String driverName= scanner.nextLine();
             Driver driver=new Driver(id, driverName);
-            allDrivers.put(driver.getDriverName(),driver);
+            allDrivers.put(driver.getId(),driver);
             id=id+1;
         }
         scanner.close();
@@ -94,9 +94,9 @@ public class LoadCSV {
 
                 Tweet currentTweet = new Tweet(tweetText, tweetSource, isRetweetBoolean, tweetDateObject, currentUser);
                 //chequeo si en el tweet se menciona al corredor
-                for (String driverName : allDrivers.getKeys()) {
-                    Driver driver = allDrivers.get(driverName);
-                    if (tweetText.contains(driverName)) {
+                for (Long driverID : allDrivers.getKeys()) {
+                    Driver driver = allDrivers.get(driverID);
+                    if (tweetText.contains(driver.getDriverName())) {
                         driver.getTweetsMentioned().add(currentTweet);
                     }
                 }

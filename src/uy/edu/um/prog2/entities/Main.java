@@ -11,7 +11,7 @@ public class Main {
         LoadCSV data = new LoadCSV();
         HashTable<String, User> userList = new HashTable<>(100000);
         HashTable<Long, Tweet> tweetList = new HashTable<>(100000);
-        HashTable<String, Driver> driverList = new HashTable<>(50);
+        HashTable<Long, Driver> driverList = new HashTable<>(50);
         HashTable<String, Hashtag> hashtagList = new HashTable<>(100000);
 
         LoadCSV.loadDataIntoList(userList, tweetList, driverList, hashtagList);
@@ -22,5 +22,10 @@ public class Main {
         System.out.println(givenUser.getUserTweets().get(2).getId());
 
         System.out.println(userList.length());
+
+        System.out.println("=====================");
+        System.out.println(driverList.get(3L).getTweetsMentioned().get(0).getContent());
+
+
     }
 }
