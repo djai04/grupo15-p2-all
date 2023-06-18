@@ -1,13 +1,16 @@
 package uy.edu.um.prog2.entities;
 
 import org.apache.commons.csv.*;
+import uy.edu.um.prog2.adt.hash.HashMapNode;
 import uy.edu.um.prog2.adt.hash.HashTable;
 import uy.edu.um.prog2.adt.linkedlist.LinkedList;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Scanner;
 
 import static java.lang.System.currentTimeMillis;
 
@@ -22,6 +25,19 @@ public class LoadCSV {
     }
 
     public static void loadDataIntoList(HashTable<String, User> allUsers, HashTable<Long, Tweet> allTweets, HashTable<String, Driver> allDrivers, HashTable<String, Hashtag> allHashtags) throws IOException {
+        // Create file
+        File file =new File("dataset/drivers.text");
+        Scanner scanner= new Scanner(file);
+        // Create drivers
+        int id=1;
+        while(scanner.hasNextLine()){
+            String driverName= scanner.nextLine();
+            Driver driver=new Driver(id, driverName);
+            allDrivers.put(driver.getDriverName(),driver);
+            id=id+1;
+        }
+        scanner.close();
+
         Reader in = new FileReader("dataset/f1_dataset_test.csv");
         Iterable<CSVRecord> records = CSVFormat.EXCEL.parse(in);
         int counter = 0;
@@ -77,6 +93,13 @@ public class LoadCSV {
                 tweetDateObject = formatter.parse(tweetDate);
 
                 Tweet currentTweet = new Tweet(tweetText, tweetSource, isRetweetBoolean, tweetDateObject, currentUser);
+                //chequeo si en el tweet se menciona al corredor
+                for (String driverName : allDrivers.getKeys()) {
+                    Driver driver = allDrivers.get(driverName);
+                    if (tweetText.contains(driverName)) {
+                        driver.getTweetsMentioned().add(currentTweet);
+                    }
+                }
 
                 //  Validate tweetHashtags
                 //  Should be a linked list of type Hashtag
