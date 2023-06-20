@@ -2,6 +2,7 @@ package uy.edu.um.prog2.entities;
 
 import uy.edu.um.prog2.adt.linkedlist.LinkedList;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class Tweet {
@@ -80,6 +81,19 @@ public class Tweet {
 
     public Date getDate() {
         return date;
+    }
+
+    public int getYear() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(this.date);
+        return cal.get(Calendar.YEAR);
+    }
+
+    public int getMonth() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(this.date);
+        // En la clase Calendar, los meses empiezan por 0, por lo que le sumamos 1 para obtener un rango de 1 a 12.
+        return cal.get(Calendar.MONTH) + 1;
     }
 
     public void setDate(Date date) {
