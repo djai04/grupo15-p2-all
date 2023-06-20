@@ -131,6 +131,16 @@ public class LoadCSV {
                     }
                 }
 
+                // Check last tweet date and update user favourites
+                if (allUsers.get(currentUser.getUsername()).getLastTweetDate() == null) {
+                    allUsers.get(currentUser.getUsername()).setLastTweetDate(currentTweet.getDate());
+                } else {
+                    if (allUsers.get(currentUser.getUsername()).getLastTweetDate().compareTo(currentTweet.getDate()) < 0) {
+                        allUsers.get(currentUser.getUsername()).setLastTweetDate(currentTweet.getDate());
+                        allUsers.get(currentUser.getUsername()).setAmountOfFavourites(currentUser.getAmountOfFavourites());
+                    }
+                }
+
                 counter++;
                 if (counter == 100000) {
                     break;

@@ -2,6 +2,8 @@ package uy.edu.um.prog2.entities;
 
 import uy.edu.um.prog2.adt.linkedlist.LinkedList;
 
+import java.util.Date;
+
 public class User {
 
     private String username;
@@ -11,6 +13,7 @@ public class User {
     private double amountOfFavourites;
 
     private LinkedList<Tweet> userTweets;
+    private Date lastTweetDate;
 
     public LinkedList<Tweet> getUserTweets() {
         return userTweets;
@@ -26,6 +29,7 @@ public class User {
         this.isVerified = isVerified;
         this.amountOfFavourites = amountOfFavourites;
         this.userTweets = new LinkedList<>();
+        this.lastTweetDate = null;
     }
 
     public String getUsername() {
@@ -50,5 +54,17 @@ public class User {
 
     public void setAmountOfFavourites(long amountOfFavourites) {
         this.amountOfFavourites = amountOfFavourites;
+    }
+
+    public void setAmountOfFavourites(double amountOfFavourites) {
+        this.amountOfFavourites = amountOfFavourites;
+    }
+
+    public Date getLastTweetDate() {
+        return lastTweetDate;
+    }
+
+    public void setLastTweetDate(Date lastTweetDate) {
+        this.lastTweetDate = lastTweetDate;
     }
 }
