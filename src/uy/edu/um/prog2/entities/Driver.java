@@ -9,6 +9,7 @@ public class Driver {
     private String driverName;
 
     private LinkedList<Tweet> tweetsMentioned;
+    private static long nextId = 1;
 
     public LinkedList<Tweet> getTweetsMentioned() {
         return tweetsMentioned;
@@ -19,10 +20,12 @@ public class Driver {
     }
 
 
-    public Driver(long id, String driverName) {
-        this.id = id;
+    public Driver(String driverName) {
+        this.id = nextId;
         this.driverName = driverName;
         this.tweetsMentioned= new LinkedList<>();
+
+        nextId++;
     }
 
     public long getId() {

@@ -1,7 +1,6 @@
 package uy.edu.um.prog2.adt.hash;
 
-import java.util.ArrayList;
-import java.util.List;
+import uy.edu.um.prog2.adt.linkedlist.LinkedList;
 
 import static java.lang.Math.abs;
 
@@ -206,8 +205,8 @@ public class HashTable<K, V> implements IHashTable<K, V> {
         return length;
     }
 
-    public List<K> getKeys() {
-        List<K> keys = new ArrayList<>();
+    public LinkedList<K> getKeys() {
+        LinkedList<K> keys = new LinkedList();
         for (HashMapNode<K, V> node : table) {
             if (node != null) {
                 keys.add(node.getKey());

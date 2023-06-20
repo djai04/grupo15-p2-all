@@ -29,12 +29,10 @@ public class LoadCSV {
         File file =new File("dataset/drivers.txt");
         Scanner scanner= new Scanner(file);
         // Create drivers
-        int id=1;
         while(scanner.hasNextLine()){
             String driverName= scanner.nextLine();
-            Driver driver=new Driver(id, driverName);
+            Driver driver=new Driver(driverName);
             allDrivers.put(driver.getId(),driver);
-            id=id+1;
         }
         scanner.close();
 
@@ -93,13 +91,6 @@ public class LoadCSV {
                 tweetDateObject = formatter.parse(tweetDate);
 
                 Tweet currentTweet = new Tweet(tweetText, tweetSource, isRetweetBoolean, tweetDateObject, currentUser);
-                //chequeo si en el tweet se menciona al corredor
-                for (Long driverID : allDrivers.getKeys()) {
-                    Driver driver = allDrivers.get(driverID);
-                    if (tweetText.contains(driver.getDriverName())) {
-                        driver.getTweetsMentioned().add(currentTweet);
-                    }
-                }
 
                 //  Validate tweetHashtags
                 //  Should be a linked list of type Hashtag
@@ -130,6 +121,15 @@ public class LoadCSV {
                 }
 
                 allTweets.put(currentTweet.getId(), currentTweet);
+
+                //chequeo si en el tweet se menciona al corredor
+                LinkedList<Long> keys = allDrivers.getKeys();
+                for (int i = 0; i < keys.length(); i++) {
+                    Driver driver = allDrivers.get(keys.get(i));
+                    if (tweetText.contains(driver.getDriverName())) {
+                        driver.getTweetsMentioned().add(currentTweet);
+                    }
+                }
 
                 counter++;
                 if (counter == 100000) {
