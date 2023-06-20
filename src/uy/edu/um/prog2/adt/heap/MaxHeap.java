@@ -1,10 +1,10 @@
 package uy.edu.um.prog2.adt.heap;
 
-public class Heap  <K extends Comparable<K>, V>  implements IHeap <K, V> {
+public class MaxHeap<K extends Comparable<K>, V>  implements IHeap <K, V> {
     private HeapNode<K, V>[] heapList;
     private int size;
 
-    public Heap() {
+    public MaxHeap() {
         this.heapList = new HeapNode[8];
         this.size = 0;
     }
@@ -29,7 +29,7 @@ public class Heap  <K extends Comparable<K>, V>  implements IHeap <K, V> {
             int positionToPush = this.size;
             int parentPosition = (positionToPush - 1) / 2;
 
-            while (this.heapList[positionToPush].getKey().compareTo(this.heapList[parentPosition].getKey()) < 0) {
+            while (this.heapList[positionToPush].getKey().compareTo(this.heapList[parentPosition].getKey()) > 0) {
                 this.swap(positionToPush, parentPosition);
                 positionToPush = parentPosition;
                 if (positionToPush == 0) {
@@ -69,7 +69,7 @@ public class Heap  <K extends Comparable<K>, V>  implements IHeap <K, V> {
 
         // Muy raro, revisar
         if (rightChild >= this.size && leftChild < this.size) { // Tiene hijo izquierdo y no derecho
-            if (this.heapList[leftChild].getKey().compareTo(this.heapList[positionToFix].getKey()) < 0) { // Si el izquierdo es mas chico
+            if (this.heapList[leftChild].getKey().compareTo(this.heapList[positionToFix].getKey()) > 0) { // Si el izquierdo es mas chico
                 this.swap(positionToFix, leftChild);
             }
             return poppedNode.getValue();
@@ -78,12 +78,12 @@ public class Heap  <K extends Comparable<K>, V>  implements IHeap <K, V> {
         }
         // Fin de lo raro
 
-        while (this.heapList[positionToFix].getKey().compareTo(this.heapList[leftChild].getKey()) > 0
-                || this.heapList[positionToFix].getKey().compareTo(this.heapList[rightChild].getKey()) > 0) {
-            if (this.heapList[leftChild].getKey().compareTo(this.heapList[rightChild].getKey()) < 0) { // Si el hijo izquierdo es mas chico
+        while (this.heapList[positionToFix].getKey().compareTo(this.heapList[leftChild].getKey()) < 0
+                || this.heapList[positionToFix].getKey().compareTo(this.heapList[rightChild].getKey()) < 0) {
+            if (this.heapList[leftChild].getKey().compareTo(this.heapList[rightChild].getKey()) > 0) { // Si el hijo izquierdo es mas chico
                 this.swap(positionToFix, leftChild);
                 positionToFix = leftChild;
-            } else if (this.heapList[rightChild].getKey().compareTo(this.heapList[leftChild].getKey()) < 0) { // Si el hijo derecho es mas chico
+            } else if (this.heapList[rightChild].getKey().compareTo(this.heapList[leftChild].getKey()) > 0) { // Si el hijo derecho es mas chico
                 this.swap(positionToFix, rightChild);
                 positionToFix = rightChild;
             } else {
@@ -94,7 +94,7 @@ public class Heap  <K extends Comparable<K>, V>  implements IHeap <K, V> {
             rightChild = (2 * positionToFix) + 2;
 
             if (rightChild >= this.size && leftChild < this.size) { // Tiene hijo izquierdo y no derecho
-                if (this.heapList[leftChild].getKey().compareTo(this.heapList[positionToFix].getKey()) < 0) { // Si el izquierdo es mas chico
+                if (this.heapList[leftChild].getKey().compareTo(this.heapList[positionToFix].getKey()) > 0) { // Si el izquierdo es mas chico
                     this.swap(positionToFix, leftChild);
                 }
                 break;
