@@ -4,6 +4,8 @@ import uy.edu.um.prog2.adt.hash.HashTable;
 import uy.edu.um.prog2.adt.heap.MaxHeap;
 import uy.edu.um.prog2.adt.linkedlist.LinkedList;
 
+import java.text.SimpleDateFormat;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Queries {
@@ -22,12 +24,27 @@ public class Queries {
             LinkedList<Tweet> tweetsFiltered = new LinkedList<>();
             for (int j = 0; j <driver.getTweetsMentioned().length() ; j++) {
                 Tweet tweetFiltered= driver.getTweetsMentioned().get(j);
-                if(tweetFiltered.getYear()==year && tweetFiltered.getMonth()==month){
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                String formattedDate = dateFormat.format(tweetFiltered.getDate());
+                System.out.println("Fecha original del tweet");
+                System.out.println(formattedDate);
+                System.out.println("Año del tweet segun getYear");
+                System.out.println(tweetFiltered.getYear());
+                System.out.println("Año que me ingresaron");
+                System.out.println(year);
+                System.out.println("Mes del tweet segun getMonth");
+                System.out.println(tweetFiltered.getMonth());
+                System.out.println("Mes que me ingresaronm");
+                System.out.println(month);
+                //pase todoo a int
+                if(Objects.equals(tweetFiltered.getYear(), year) && Objects.equals(tweetFiltered.getMonth(), month)){
+                    System.out.println("entre");
                     tweetsFiltered.add(tweetFiltered);
                 }
             }
 
             driversByMentions.push(tweetsFiltered.length(), driver);
+            System.out.println(tweetsFiltered.length());
         }
         for (int i = 0; i < 10; i++) {
             Driver mostMentionedDriver = driversByMentions.pop();
