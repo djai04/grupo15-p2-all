@@ -4,22 +4,25 @@ import uy.edu.um.prog2.adt.hash.HashTable;
 import uy.edu.um.prog2.adt.linkedlist.LinkedList;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLOutput;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         LoadCSV data = new LoadCSV();
-        HashTable<String, User> userList = new HashTable<>(100000);
-        HashTable<Long, Tweet> tweetList = new HashTable<>(100000);
+        HashTable<String, User> userList = new HashTable<>(1000000);
+        HashTable<Long, Tweet> tweetList = new HashTable<>(1000000);
         HashTable<Long, Driver> driverList = new HashTable<>(50);
-        HashTable<String, Hashtag> hashtagList = new HashTable<>(100000);
+        HashTable<String, Hashtag> hashtagList = new HashTable<>(1000000);
 
         LoadCSV.loadDataIntoList(userList, tweetList, driverList, hashtagList);
 
-        User givenUser = userList.get("Chris Hawkins");
+        User givenUser = userList.get("Michael");
         System.out.println(givenUser.getUserTweets().get(2).getContent());
         System.out.println(givenUser.getUserTweets().get(2).getHashtags().get(0).getTag());
         System.out.println(givenUser.getUserTweets().get(2).getId());
+        System.out.println("AÑO: " + DateUtils.getYearFromDate(givenUser.getUserTweets().get(0).getDate()));
+        System.out.println("MES: " + DateUtils.getMonthFromDate(givenUser.getUserTweets().get(0).getDate()));
 
         System.out.println(userList.length());
 
@@ -28,7 +31,9 @@ public class Main {
         System.out.println("=====================");
         System.out.println(userList.get("Cecilia Demartini").getAmountOfFavourites());
 
+        System.out.println("===== COMIENZO DE QUERY =====");
         Queries.diezPilotosMasMencionados(driverList);
+        System.out.println("===== FINAL DE QUERY =====");
 
     }
 }

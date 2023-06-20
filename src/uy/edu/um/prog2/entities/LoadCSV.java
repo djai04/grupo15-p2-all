@@ -15,11 +15,6 @@ import java.util.Scanner;
 import static java.lang.System.currentTimeMillis;
 
 public class LoadCSV {
-
-    // En el constructor podriamos recorrer la totalidad del CSV, crear los objetos,
-    //  e ir insertandolos en las estructuras de datos
-
-
     public LoadCSV() throws IOException {
 
     }
@@ -36,7 +31,7 @@ public class LoadCSV {
         }
         scanner.close();
 
-        Reader in = new FileReader("dataset/f1_dataset_test.csv");
+        Reader in = new FileReader("dataset/f1_dataset.csv");
         Iterable<CSVRecord> records = CSVFormat.EXCEL.parse(in);
         int counter = 0;
         boolean isFirst = true;
@@ -142,7 +137,7 @@ public class LoadCSV {
                 }
 
                 counter++;
-                if (counter == 100000) {
+                if (counter == 1000000) {
                     break;
                 }
             } catch (Exception e) {
