@@ -50,6 +50,14 @@ public class MaxHeap<K extends Comparable<K>, V>  implements IHeap <K, V> {
         }
     }
 
+    public K peekKey() {
+        if (this.size > 0) {
+            return this.heapList[0].getKey();
+        } else {
+            return null;
+        }
+    }
+
     @Override
     public V pop() {
         // Clone issues?

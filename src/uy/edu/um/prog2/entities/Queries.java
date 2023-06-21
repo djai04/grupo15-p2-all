@@ -56,10 +56,11 @@ public class Queries {
         }
 
         for (int i = 0; i < 10; i++) {
+            int amountOfTweets = driversByMentions.peekKey();
             Driver mostMentionedDriver = driversByMentions.pop();
             System.out.println("======= Piloto ======");
             System.out.println(mostMentionedDriver.getDriverName());
-            System.out.println(mostMentionedDriver.getTweetsMentioned().length());
+            System.out.println(amountOfTweets);
             System.out.println();
         }
     }
