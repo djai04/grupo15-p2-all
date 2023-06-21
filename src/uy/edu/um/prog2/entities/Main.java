@@ -16,6 +16,7 @@ public class Main {
         HashTable<String, Hashtag> hashtagList = new HashTable<>(1000000);
 
         LoadCSV.loadDataIntoList(userList, tweetList, driverList, hashtagList);
+        System.out.println(tweetList.length());
 
         System.out.println("===== QUERY BEGINNING =====");
         System.out.println();
