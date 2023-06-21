@@ -146,7 +146,36 @@ public class Queries {
             }
         }
 
-        System.out.println("La cantidad de hashtags distintos en el dia " + givenDate + " es: " + filteredTweetsHashtags.length());
+        System.out.println("La cantidad de hashtags distintos en el " + givenDate + " es: " + filteredTweetsHashtags.length());
+    }
+
+    public static void hashtagMasUsadoParaUnDiaDado(HashTable<Long, Tweet> allTweets) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ingrese la fecha en formato YYYY-MM-DD: ");
+        String givenDate = scanner.nextLine();
+
+        String[] elements = givenDate.split("-");
+        int year = Integer.parseInt(elements[0]);
+        int month = Integer.parseInt(elements[1]);
+        int day = Integer.parseInt(elements[2]);
+
+        LinkedList<Long> tweetKeys = allTweets.getKeys();
+        LinkedList<Tweet> tweetsFiltered = new LinkedList<>();
+
+        for (int i = 0; i < tweetKeys.length(); i++) {
+            Tweet tweet = allTweets.get(tweetKeys.get(i));
+
+            int tweetYear = DateUtils.getYearFromDate(tweet.getDate());
+            int tweetMonth = DateUtils.getMonthFromDate(tweet.getDate());
+            int tweetDay = DateUtils.getDayFromDate(tweet.getDate());
+
+            if (tweetYear == year && tweetMonth == month && tweetDay == day) {
+                tweetsFiltered.add(tweet);
+            }
+        }
+
+
+
     }
 
 }
