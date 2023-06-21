@@ -54,7 +54,7 @@ public class Queries {
         LinkedList<String> usersKeys = allUsers.getKeys();
 
         for (int i = 0; i < usersKeys.length(); i++) {
-            User user=allUsers.get(usersKeys.get(i));
+            User user = allUsers.get(usersKeys.get(i));
             usersByTweets.push(user.getUserTweets().length(), user);
         }
         for (int i = 0; i < 15; i++) {
@@ -89,4 +89,64 @@ public class Queries {
             System.out.println("Amount of favourites: " + topUserFavourite.getAmountOfFavourites());
             System.out.println();
         }
-    }}
+    }
+
+    public static void encontrarTweetSegunPalabra(HashTable<Long, Tweet> allTweets) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ingrese la palabra o frase a buscar: ");
+        String phrase = scanner.nextLine();
+        long counter = 0;
+
+        LinkedList<Long> tweetsKeys = allTweets.getKeys();
+
+        for (int i = 0; i < tweetsKeys.length(); i++) {
+            Tweet tweet = allTweets.get(tweetsKeys.get(i));
+            if (tweet.getContent().contains(phrase)) {
+                counter++;
+            }
+        }
+
+        System.out.println("La cantidad de tweets con esa palabra o frase es: " + counter);
+    }
+
+    public static void cantidadDeHashtagsDistintosParaUnDiaDado(HashTable<Long, Tweet> allTweets) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ingrese la fecha en formato YYYY-MM-DD: ");
+        String givenDate = scanner.nextLine();
+
+        String[] elements = givenDate.split("-");
+        int year = Integer.parseInt(elements[0]);
+        int month = Integer.parseInt(elements[1]);
+        int day = Integer.parseInt(elements[2]);
+
+        LinkedList<Long> tweetKeys = allTweets.getKeys();
+        LinkedList<Tweet> tweetsFiltered = new LinkedList<>();
+
+        for (int i = 0; i < tweetKeys.length(); i++) {
+            Tweet tweet = allTweets.get(tweetKeys.get(i));
+
+            int tweetYear = DateUtils.getYearFromDate(tweet.getDate());
+            int tweetMonth = DateUtils.getMonthFromDate(tweet.getDate());
+            int tweetDay = DateUtils.getDayFromDate(tweet.getDate());
+
+            if (tweetYear == year && tweetMonth == month && tweetDay == day) {
+                tweetsFiltered.add(tweet);
+            }
+        }
+
+        LinkedList<Hashtag> filteredTweetsHashtags = new LinkedList<>();
+
+        for (int i = 0; i < tweetsFiltered.length(); i++) {
+            LinkedList<Hashtag> thisTweetHashtag = tweetsFiltered.get(i).getHashtags();
+
+            for (int j = 0; j < thisTweetHashtag.length(); j++) {
+                if (!filteredTweetsHashtags.isInList(thisTweetHashtag.get(j))) {
+                    filteredTweetsHashtags.add(thisTweetHashtag.get(j));
+                }
+            }
+        }
+
+        System.out.println("La cantidad de hashtags distintos en el dia " + givenDate + " es: " + filteredTweetsHashtags.length());
+    }
+
+}

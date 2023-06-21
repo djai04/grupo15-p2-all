@@ -16,4 +16,10 @@ public class DateUtils {
         return calendar.get(Calendar.MONTH) + 1; // Adding 1 because months are zero-based
     }
 
+    public static int getDayFromDate(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar.get(Calendar.DAY_OF_MONTH);
+    }
+
 }

@@ -31,7 +31,7 @@ public class LoadCSV {
         }
         scanner.close();
 
-        Reader in = new FileReader("dataset/f1_dataset.csv");
+        Reader in = new FileReader("dataset/f1_dataset_test.csv");
         Iterable<CSVRecord> records = CSVFormat.EXCEL.parse(in);
         int counter = 0;
         boolean isFirst = true;
