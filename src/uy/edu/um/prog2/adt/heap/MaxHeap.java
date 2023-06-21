@@ -29,7 +29,7 @@ public class MaxHeap<K extends Comparable<K>, V>  implements IHeap <K, V> {
             int positionToPush = this.size;
             int parentPosition = (positionToPush - 1) / 2;
 
-            while (this.heapList[positionToPush].getKey().compareTo(this.heapList[parentPosition].getKey()) > 0) {
+            while (this.heapList[positionToPush].getKey().compareTo(this.heapList[parentPosition].getKey()) >= 0) {
                 this.swap(positionToPush, parentPosition);
                 positionToPush = parentPosition;
                 if (positionToPush == 0) {
@@ -77,7 +77,7 @@ public class MaxHeap<K extends Comparable<K>, V>  implements IHeap <K, V> {
 
         // Muy raro, revisar
         if (rightChild >= this.size && leftChild < this.size) { // Tiene hijo izquierdo y no derecho
-            if (this.heapList[leftChild].getKey().compareTo(this.heapList[positionToFix].getKey()) > 0) { // Si el izquierdo es mas chico
+            if (this.heapList[leftChild].getKey().compareTo(this.heapList[positionToFix].getKey()) >= 0) { // Si el izquierdo es mas chico
                 this.swap(positionToFix, leftChild);
             }
             return poppedNode.getValue();
@@ -88,7 +88,7 @@ public class MaxHeap<K extends Comparable<K>, V>  implements IHeap <K, V> {
 
         while (this.heapList[positionToFix].getKey().compareTo(this.heapList[leftChild].getKey()) < 0
                 || this.heapList[positionToFix].getKey().compareTo(this.heapList[rightChild].getKey()) < 0) {
-            if (this.heapList[leftChild].getKey().compareTo(this.heapList[rightChild].getKey()) > 0) { // Si el hijo izquierdo es mas chico
+            if (this.heapList[leftChild].getKey().compareTo(this.heapList[rightChild].getKey()) >= 0) { // Si el hijo izquierdo es mas chico
                 this.swap(positionToFix, leftChild);
                 positionToFix = leftChild;
             } else if (this.heapList[rightChild].getKey().compareTo(this.heapList[leftChild].getKey()) > 0) { // Si el hijo derecho es mas chico
@@ -102,7 +102,7 @@ public class MaxHeap<K extends Comparable<K>, V>  implements IHeap <K, V> {
             rightChild = (2 * positionToFix) + 2;
 
             if (rightChild >= this.size && leftChild < this.size) { // Tiene hijo izquierdo y no derecho
-                if (this.heapList[leftChild].getKey().compareTo(this.heapList[positionToFix].getKey()) > 0) { // Si el izquierdo es mas chico
+                if (this.heapList[leftChild].getKey().compareTo(this.heapList[positionToFix].getKey()) >= 0) { // Si el izquierdo es mas chico
                     this.swap(positionToFix, leftChild);
                 }
                 break;

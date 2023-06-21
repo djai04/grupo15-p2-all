@@ -17,23 +17,11 @@ public class Main {
 
         LoadCSV.loadDataIntoList(userList, tweetList, driverList, hashtagList);
 
-        User givenUser = userList.get("Michael");
-        System.out.println(givenUser.getUserTweets().get(2).getContent());
-        System.out.println(givenUser.getUserTweets().get(2).getHashtags().get(0).getTag());
-        System.out.println(givenUser.getUserTweets().get(2).getId());
-        System.out.println("AÑO: " + DateUtils.getYearFromDate(givenUser.getUserTweets().get(0).getDate()));
-        System.out.println("MES: " + DateUtils.getMonthFromDate(givenUser.getUserTweets().get(0).getDate()));
-
-        System.out.println(userList.length());
-
-        System.out.println("=====================");
-        System.out.println(driverList.get(19L).getTweetsMentioned().get(0).getContent());
-        System.out.println("=====================");
-        System.out.println(userList.get("Cecilia Demartini").getAmountOfFavourites());
-
-        System.out.println("===== COMIENZO DE QUERY =====");
-        Queries.diezPilotosMasMencionados(driverList);
-        System.out.println("===== FINAL DE QUERY =====");
+        System.out.println("===== QUERY BEGINNING =====");
+        System.out.println();
+        // Desde el 07/2021 hasta el 08/2022
+        Queries.sieteCuentasConMasFavoritos(userList);
+        System.out.println("===== QUERY END =====");
 
     }
 }
