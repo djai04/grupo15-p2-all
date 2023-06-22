@@ -23,7 +23,7 @@ public class Main {
         System.out.println("===== QUERY BEGINNING =====");
         System.out.println();
         // Desde el 07/2021 hasta el 08/2022
-        Queries.cantidadDeHashtagsDistintosParaUnDiaDado(tweetList);
+        Queries.hashtagMasUsadoParaUnDiaDado(tweetList);
         System.out.println("===== QUERY END =====");
 
     }

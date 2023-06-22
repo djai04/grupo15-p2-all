@@ -201,11 +201,26 @@ public class Queries {
         int month = Integer.parseInt(elements[1]);
         int day = Integer.parseInt(elements[2]);
 
-        LinkedList<Long> tweetKeys = allTweets.getKeys();
         LinkedList<Tweet> tweetsFiltered = new LinkedList<>();
 
+        /**
+        LinkedList<Long> tweetKeys = allTweets.getKeys();
         for (int i = 0; i < tweetKeys.length(); i++) {
             Tweet tweet = allTweets.get(tweetKeys.get(i));
+
+            int tweetYear = DateUtils.getYearFromDate(tweet.getDate());
+            int tweetMonth = DateUtils.getMonthFromDate(tweet.getDate());
+            int tweetDay = DateUtils.getDayFromDate(tweet.getDate());
+
+            if (tweetYear == year && tweetMonth == month && tweetDay == day) {
+                tweetsFiltered.add(tweet);
+            }
+        }
+         **/
+
+        Long[] tweetsKeys = allTweets.getKeysIfLong(allTweets.length());
+        for (int i = 0; i < tweetsKeys.length; i++) {
+            Tweet tweet = allTweets.get(tweetsKeys[i]);
 
             int tweetYear = DateUtils.getYearFromDate(tweet.getDate());
             int tweetMonth = DateUtils.getMonthFromDate(tweet.getDate());
