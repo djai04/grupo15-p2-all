@@ -214,4 +214,16 @@ public class HashTable<K, V> implements IHashTable<K, V> {
         }
         return keys;
     }
+
+    public Long[] getKeysIfLong(int initialCapacity) {
+        Long[] keys = new Long[initialCapacity];
+        int counter = 0;
+        for (HashMapNode<K, V> node : table) {
+            if (node != null) {
+                keys[counter] = (Long) node.getKey();
+                counter++;
+            }
+        }
+        return keys;
+    }
 }

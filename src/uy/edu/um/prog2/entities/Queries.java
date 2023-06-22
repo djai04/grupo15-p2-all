@@ -97,11 +97,19 @@ public class Queries {
         String phrase = scanner.nextLine();
         long counter = 0;
 
+        /**
         LinkedList<Long> tweetsKeys = allTweets.getKeys();
-
         for (int i = 0; i < tweetsKeys.length(); i++) {
             Tweet tweet = allTweets.get(tweetsKeys.get(i));
             if (tweet.getContent().contains(phrase)) {
+                counter++;
+            }
+        }**/
+
+        Long[] tweetKeys = allTweets.getKeysIfLong(allTweets.length());
+        for (int i = 0; i < tweetKeys.length; i++) {
+            Tweet tweet = allTweets.get(tweetKeys[i]);
+            if (tweet.getContent().toLowerCase().contains(phrase.toLowerCase())) {
                 counter++;
             }
         }
