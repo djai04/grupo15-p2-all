@@ -173,37 +173,46 @@ public class Queries {
                 tweetsFiltered.add(tweet);
             }
         }
-        long amountOfTimesRepeated=1;
+
         HashTable<String,Long> hashtags = new HashTable<>();
+
         for (int i = 0; i < tweetsFiltered.length(); i++) {
             //voy a cada tweet de los tweets filtrados
-            Tweet tweet=tweetsFiltered.get(i);
+            Tweet tweet = tweetsFiltered.get(i);
             //Recorro la lista de hasthtags del tweet
             for (int j = 0; j < tweet.getHashtags().length(); j++) {
                 //Me paro en cada Hashtag
-                Hashtag hashtag=tweet.getHashtags().get(j);
+                Hashtag hashtag = tweet.getHashtags().get(j);
                 // Me pregunto si mi hashTable tiene ese hashtag
                 if(!hashtags.contains(hashtag.getTag())){
                     //Lo agrego con Long=1 porque es la primera vez que aparece
-                    hashtags.put(hashtag.getTag(), 1);
+                    hashtags.put(hashtag.getTag(), 1L);
                 } else{
-                    //La idea aca es modificar el Long de hash
-                    hashtags.get(hashtag.getTag())=hashtags.get(hashtag.getTag())+1;
-
+                    Long amountRepeated = hashtags.get(hashtag.getTag());
+                    hashtags.remove(hashtag.getTag());
+                    hashtags.put(hashtag.getTag(), amountRepeated + 1);
                 }
             }
         }
+
+        MaxHeap<Long, String> mostRepeatingHashtags = new MaxHeap<>();
         LinkedList<String> hashtagKeys = hashtags.getKeys();
+
         for (int i = 0; i < hashtagKeys.length(); i++) {
-
-
-
-
+            mostRepeatingHashtags.push(hashtags.get(hashtagKeys.get(i)), hashtagKeys.get(i));
         }
 
+        String mostRepeatingHashtag = mostRepeatingHashtags.pop();
 
+        if (mostRepeatingHashtag == null) {
+            System.out.println("No hubo hashtags en el dia dado.");
+        }
 
-
+        if (mostRepeatingHashtag.equals("f1")) {
+            System.out.println("El hashtag que mas se repite en este dia es: " + mostRepeatingHashtags.pop());
+        } else {
+            System.out.println("El hashtag que mas se repite en este dia es: " + mostRepeatingHashtag);
+        }
 
     }
 
