@@ -31,7 +31,7 @@ public class LoadCSV {
         }
         scanner.close();
 
-        Reader in = new FileReader("dataset/f1_dataset.csv");
+        Reader in = new FileReader("dataset/f1_dataset_test.csv");
         Iterable<CSVRecord> records = CSVFormat.EXCEL.parse(in);
         int counter = 0;
         boolean isFirst = true;
@@ -121,7 +121,7 @@ public class LoadCSV {
                 LinkedList<Long> keys = allDrivers.getKeys();
                 for (int i = 0; i < keys.length(); i++) {
                     Driver driver = allDrivers.get(keys.get(i));
-                    if (tweetText.contains(driver.getDriverName())) {
+                    if (tweetText.toLowerCase().contains(driver.getDriverName().toLowerCase())) {
                         driver.getTweetsMentioned().add(currentTweet);
                     }
                 }

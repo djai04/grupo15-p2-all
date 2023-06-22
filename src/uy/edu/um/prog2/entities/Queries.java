@@ -83,10 +83,18 @@ public class Queries {
 
     public static void sieteCuentasConMasFavoritos(HashTable<String, User> allUsers) {
         MaxHeap<Double, User> usersByFavourites = new MaxHeap<>();
-        LinkedList<String> usersKeys = allUsers.getKeys();
 
+        /**
+        LinkedList<String> usersKeys = allUsers.getKeys();
         for (int i = 0; i < usersKeys.length(); i++) {
             User user = allUsers.get(usersKeys.get(i));
+            usersByFavourites.push(user.getAmountOfFavourites(), user);
+        }
+         **/
+
+        String[] userKeys = allUsers.getKeysIfString(allUsers.length());
+        for (int i = 0; i < userKeys.length; i++) {
+            User user = allUsers.get(userKeys[i]);
             usersByFavourites.push(user.getAmountOfFavourites(), user);
         }
 
@@ -113,7 +121,8 @@ public class Queries {
             if (tweet.getContent().contains(phrase)) {
                 counter++;
             }
-        }**/
+        }
+         **/
 
         Long[] tweetKeys = allTweets.getKeysIfLong(allTweets.length());
         for (int i = 0; i < tweetKeys.length; i++) {
@@ -136,11 +145,27 @@ public class Queries {
         int month = Integer.parseInt(elements[1]);
         int day = Integer.parseInt(elements[2]);
 
-        LinkedList<Long> tweetKeys = allTweets.getKeys();
+        // Podria ser un hash
         LinkedList<Tweet> tweetsFiltered = new LinkedList<>();
 
+        /**
+        LinkedList<Long> tweetKeys = allTweets.getKeys();
         for (int i = 0; i < tweetKeys.length(); i++) {
             Tweet tweet = allTweets.get(tweetKeys.get(i));
+
+            int tweetYear = DateUtils.getYearFromDate(tweet.getDate());
+            int tweetMonth = DateUtils.getMonthFromDate(tweet.getDate());
+            int tweetDay = DateUtils.getDayFromDate(tweet.getDate());
+
+            if (tweetYear == year && tweetMonth == month && tweetDay == day) {
+                tweetsFiltered.add(tweet);
+            }
+        }
+         **/
+
+        Long[] tweetsKeys = allTweets.getKeysIfLong(allTweets.length());
+        for (int i = 0; i < tweetsKeys.length; i++) {
+            Tweet tweet = allTweets.get(tweetsKeys[i]);
 
             int tweetYear = DateUtils.getYearFromDate(tweet.getDate());
             int tweetMonth = DateUtils.getMonthFromDate(tweet.getDate());
