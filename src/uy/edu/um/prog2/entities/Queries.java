@@ -51,12 +51,21 @@ public class Queries {
 
     public static void quinceUsuariosConMasTweets(HashTable<String, User> allUsers) {
         MaxHeap<Integer,User> usersByTweets = new MaxHeap<>();
-        LinkedList<String> usersKeys = allUsers.getKeys();
 
+        /**
+        LinkedList<String> usersKeys = allUsers.getKeys();
         for (int i = 0; i < usersKeys.length(); i++) {
             User user = allUsers.get(usersKeys.get(i));
             usersByTweets.push(user.getUserTweets().length(), user);
         }
+         **/
+
+        String[] userKeys = allUsers.getKeysIfString(allUsers.length());
+        for (int i = 0; i < userKeys.length; i++) {
+            User user = allUsers.get(userKeys[i]);
+            usersByTweets.push(user.getUserTweets().length(), user);
+        }
+
         for (int i = 0; i < 15; i++) {
             User topUser = usersByTweets.pop();
             System.out.println("===== USER =====");
