@@ -15,13 +15,15 @@ public class Main {
         HashTable<Long, Driver> driverList = new HashTable<>(50);
         HashTable<String, Hashtag> hashtagList = new HashTable<>(1000000);
 
+        System.out.println("===== DATA LOAD BEGINNING =====");
         LoadCSV.loadDataIntoList(userList, tweetList, driverList, hashtagList);
+        System.out.println("===== DATA LOAD END =====");
         System.out.println(tweetList.length());
 
         System.out.println("===== QUERY BEGINNING =====");
         System.out.println();
         // Desde el 07/2021 hasta el 08/2022
-        Queries.hashtagMasUsadoParaUnDiaDado(tweetList);
+        Queries.encontrarTweetSegunPalabra(tweetList);
         System.out.println("===== QUERY END =====");
 
     }
