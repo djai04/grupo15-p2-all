@@ -52,7 +52,7 @@ public class Queries {
         }
         Long tiempoFinal=System.currentTimeMillis();
         Long tiempoPasado= tiempoFinal-tiempoInicial;
-        System.out.println(tiempoPasado);
+        // System.out.println(tiempoPasado);
     }
 
     public static void quinceUsuariosConMasTweets(HashTable<String, User> allUsers) {
@@ -90,7 +90,7 @@ public class Queries {
         }
         Long tiempoFinal=System.currentTimeMillis();
         Long tiempoPasado= tiempoFinal-tiempoInicial;
-        System.out.println(tiempoPasado);
+        // System.out.println(tiempoPasado);
     }
 
     public static void sieteCuentasConMasFavoritos(HashTable<String, User> allUsers) {
@@ -121,7 +121,7 @@ public class Queries {
 
             Long tiempoFinal=System.currentTimeMillis();
             Long tiempoPasado= tiempoFinal-tiempoInicial;
-            System.out.println(tiempoPasado);
+            // System.out.println(tiempoPasado);
         }
     }
 
@@ -153,7 +153,7 @@ public class Queries {
         System.out.println("La cantidad de tweets con esa palabra o frase es: " + counter);
         Long tiempoFinal=System.currentTimeMillis();
         Long tiempoPasado= tiempoFinal-tiempoInicial;
-        System.out.println(tiempoPasado);
+        // System.out.println(tiempoPasado);
     }
 
     public static void cantidadDeHashtagsDistintosParaUnDiaDado(HashTable<Long, Tweet> allTweets) {
@@ -222,7 +222,7 @@ public class Queries {
 
         Long tiempoFinal=System.currentTimeMillis();
         Long tiempoPasado= tiempoFinal-tiempoInicial;
-        System.out.println(tiempoPasado);
+        // System.out.println(tiempoPasado);
     }
 
     public static void hashtagMasUsadoParaUnDiaDado(HashTable<Long, Tweet> allTweets) {
@@ -313,7 +313,7 @@ public class Queries {
 
         Long tiempoFinal=System.currentTimeMillis();
         Long tiempoPasado= tiempoFinal-tiempoInicial;
-        System.out.println(tiempoPasado);
+        // System.out.println(tiempoPasado);
 
     }
 

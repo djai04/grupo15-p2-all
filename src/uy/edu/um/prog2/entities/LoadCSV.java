@@ -140,7 +140,7 @@ public class LoadCSV {
         System.out.println(amountOfRecordsSkipped);
         Long tiempoFinal=System.currentTimeMillis();
         Long tiempoPasado= tiempoFinal-tiempoInicial;
-        System.out.println(tiempoPasado);
+        // System.out.println(tiempoPasado);
 
     }
 
