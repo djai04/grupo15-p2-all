@@ -32,8 +32,12 @@ Finalmente, realizamos 10 pops en el heap para conseguir los 10 pilotos mas menc
 Este reporte resulto relativamente simple, ya que solo se debio recorrer el hash con todos los usuarios, ingresarlos a un heap con el largo de su lista de tweets como clave, y luego poppear los primeros 15.
 - Cantidad de hashtags distintos para un día dado: Primero, realizamos las validaciones de la fecha.
 Continuamos creando un hash de tweets filtrados segun dicha fecha. A ese hash lo recorremos, y vamos ingresando los hashtags de cada tweet, si no se repiten, a otro hash. Finalmente, devolvemos el largo del hash final.
-- Hashtag mas usado para un dia dado:
-Todo tuyo Guada.
+- Hashtag mas usado para un dia dado: Primero solicitamos una fecha en formato YYYY-MM-DD y validamos los valores. 
+Luego, se recorren todos los tweets almacenados en un HashTable, seleccionando aquellos que coinciden con la fecha proporcionada.
+Luego, obtenemos los hashtags de cada tweet filtrado, y las añadimos a un nuevo HashTable, llevando el rastro de cuantas veces se repite.
+Finalmente, insertamos los hashtags y su cantidad de repeticiones en un MaxHeap para identificar el más usado. 
+Devolvemos el mas usado sin contar f1.
+Se imprime el tiempo de ejecución al final.
 - Top 7 cuentas con más favoritos:
 En esencia el mismo funcionamiento que Top 15 usuarios con mas tweets, solo que en vez de ingresarlos al heap por el largo de su lista de tweets, los ingresamos por la cantidad de favoritos.
 - Cantidad de tweets con una palabra o frase específicos:
@@ -44,4 +48,21 @@ Basicamente, se recorre todo el hash con todos los tweets, nos fijamos si cada t
 Despues vemos
 
 ### Tiempo de ejecucion
-tuyisimo guada
+- Carga de datos: La primera carga de datos tomo 10015 millis. La segunda tomo 9729.
+Promedia 9872 millis.
+- Consulta numero 1: La primera corrida de la consulta con mes 08 y año 2021 tomo 9178 millis. 
+La segunda corrida con mes 12 y año 2021 tomo 28495 millis. La tercera corrida con mes 07 y año 2022 tomo 13769 millis.
+Promedia 17147 millis.
+- Consulta numero 2: La primera corrida tomo 277 millis. La segunda corrida tomo 298 millis.
+Promedia 287 millis.
+- Consulta numero 3: La primera corrida con fecha 2022-07-03 tomo 45333 millis.
+La segunda corrida con fecha 2021-12-12 tomo 28605 millis. La tercera corrida con fecha 2021-10-23 tomo 10559 millis.
+Promedia 28165 millis.
+- Consulta numero 4: La primera corrida con fecha 2021-12-12 tomo 10392 millis. 
+La segunda corrida con fecha 2022-07-03 tomo 8280 millis. La tercera corrida con fecha 2021-10-23 tomo 7952 millis.
+Promedia 8874 millis.
+- Consulta numero 5: La primera corrida tomo 174 millis. La segunda corrida tomo 181 millis.
+Promedia 177 millis.
+- Consulta numero 6: La primera corrida con la palabra "god" tomo 3430 millis.
+La segunda corrida con la frase "happy new year" tomo 6894 millis. La tercera corrida con la frase "Christmas" tomo 4051 millis.
+Promedia 4791 millis.
