@@ -169,9 +169,10 @@ public class Queries {
             int day = Integer.parseInt(elements[2]);
 
             // Podria ser un hash
-            LinkedList<Tweet> tweetsFiltered = new LinkedList<>();
+            HashTable<Long, Tweet> tweetsFiltered = new HashTable<>();
 
             /**
+             * OLD
             LinkedList<Long> tweetKeys = allTweets.getKeys();
             for (int i = 0; i < tweetKeys.length(); i++) {
                 Tweet tweet = allTweets.get(tweetKeys.get(i));
@@ -195,18 +196,21 @@ public class Queries {
                 int tweetDay = DateUtils.getDayFromDate(tweet.getDate());
 
                 if (tweetYear == year && tweetMonth == month && tweetDay == day) {
-                    tweetsFiltered.add(tweet);
+                    tweetsFiltered.put(tweet.getId(), tweet);
                 }
             }
 
-            LinkedList<Hashtag> filteredTweetsHashtags = new LinkedList<>();
+
+            // LinkedList<Hashtag> filteredTweetsHashtags = new LinkedList<>();
+            HashTable<String, Hashtag> filteredTweetsHashtags = new HashTable<>();
+            Long[] tweetsFilteredKeys = tweetsFiltered.getKeysIfLong(tweetsFiltered.length());
 
             for (int i = 0; i < tweetsFiltered.length(); i++) {
-                LinkedList<Hashtag> thisTweetHashtag = tweetsFiltered.get(i).getHashtags();
+                LinkedList<Hashtag> thisTweetHashtag = tweetsFiltered.get(tweetsFilteredKeys[i]).getHashtags();
 
                 for (int j = 0; j < thisTweetHashtag.length(); j++) {
-                    if (!filteredTweetsHashtags.isInList(thisTweetHashtag.get(j))) {
-                        filteredTweetsHashtags.add(thisTweetHashtag.get(j));
+                    if (!filteredTweetsHashtags.contains(thisTweetHashtag.get(j).getTag())) {
+                        filteredTweetsHashtags.put(thisTweetHashtag.get(j).getTag(), thisTweetHashtag.get(j));
                     }
                 }
             }

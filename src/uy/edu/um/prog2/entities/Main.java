@@ -23,7 +23,7 @@ public class Main {
         do {
             System.out.println("1. Cargar datos.");
             System.out.println("2. Realizar consultas.");
-            System.out.println("3. Finalizar programa.");
+            // System.out.println("3. Finalizar programa.");
             Scanner scanner = new Scanner(System.in);
             System.out.println("Ingrese la opcion que desea ejecutar: ");
             menuOption = scanner.nextLine();
