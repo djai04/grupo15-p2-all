@@ -238,7 +238,7 @@ public class Queries {
             int month = Integer.parseInt(elements[1]);
             int day = Integer.parseInt(elements[2]);
 
-            LinkedList<Tweet> tweetsFiltered = new LinkedList<>();
+            HashTable<Long, Tweet> tweetsFiltered = new HashTable<>();
 
             /**
              * OLD
@@ -265,15 +265,16 @@ public class Queries {
                 int tweetDay = DateUtils.getDayFromDate(tweet.getDate());
 
                 if (tweetYear == year && tweetMonth == month && tweetDay == day) {
-                    tweetsFiltered.add(tweet);
+                    tweetsFiltered.put(tweet.getId(), tweet);
                 }
             }
 
             HashTable<String,Long> hashtags = new HashTable<>();
+            Long[] tweetsFilteredKeys = tweetsFiltered.getKeysIfLong(tweetsFiltered.length());
 
-            for (int i = 0; i < tweetsFiltered.length(); i++) {
+            for (int i = 0; i < tweetsFilteredKeys.length; i++) {
                 //voy a cada tweet de los tweets filtrados
-                Tweet tweet = tweetsFiltered.get(i);
+                Tweet tweet = tweetsFiltered.get(tweetsFilteredKeys[i]);
                 //Recorro la lista de hasthtags del tweet
                 for (int j = 0; j < tweet.getHashtags().length(); j++) {
                     //Me paro en cada Hashtag
