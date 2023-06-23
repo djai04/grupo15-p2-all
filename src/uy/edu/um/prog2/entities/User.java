@@ -67,4 +67,5 @@ public class User {
     public void setLastTweetDate(Date lastTweetDate) {
         this.lastTweetDate = lastTweetDate;
     }
+
 }
