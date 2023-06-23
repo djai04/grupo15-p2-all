@@ -220,80 +220,84 @@ public class Queries {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Ingrese la fecha en formato YYYY-MM-DD: ");
         String givenDate = scanner.nextLine();
-        MaxHeap<Long, Hashtag> hashtagsRepeated = new MaxHeap<>();
-        String[] elements = givenDate.split("-");
-        int year = Integer.parseInt(elements[0]);
-        int month = Integer.parseInt(elements[1]);
-        int day = Integer.parseInt(elements[2]);
 
-        LinkedList<Tweet> tweetsFiltered = new LinkedList<>();
+        if (DateUtils.isValidDate(givenDate)) {
+            MaxHeap<Long, Hashtag> hashtagsRepeated = new MaxHeap<>();
+            String[] elements = givenDate.split("-");
+            int year = Integer.parseInt(elements[0]);
+            int month = Integer.parseInt(elements[1]);
+            int day = Integer.parseInt(elements[2]);
 
-        /**
-        LinkedList<Long> tweetKeys = allTweets.getKeys();
-        for (int i = 0; i < tweetKeys.length(); i++) {
-            Tweet tweet = allTweets.get(tweetKeys.get(i));
+            LinkedList<Tweet> tweetsFiltered = new LinkedList<>();
 
-            int tweetYear = DateUtils.getYearFromDate(tweet.getDate());
-            int tweetMonth = DateUtils.getMonthFromDate(tweet.getDate());
-            int tweetDay = DateUtils.getDayFromDate(tweet.getDate());
+            /**
+             * OLD
+             LinkedList<Long> tweetKeys = allTweets.getKeys();
+             for (int i = 0; i < tweetKeys.length(); i++) {
+             Tweet tweet = allTweets.get(tweetKeys.get(i));
 
-            if (tweetYear == year && tweetMonth == month && tweetDay == day) {
-                tweetsFiltered.add(tweet);
-            }
-        }
-         **/
+             int tweetYear = DateUtils.getYearFromDate(tweet.getDate());
+             int tweetMonth = DateUtils.getMonthFromDate(tweet.getDate());
+             int tweetDay = DateUtils.getDayFromDate(tweet.getDate());
 
-        Long[] tweetsKeys = allTweets.getKeysIfLong(allTweets.length());
-        for (int i = 0; i < tweetsKeys.length; i++) {
-            Tweet tweet = allTweets.get(tweetsKeys[i]);
+             if (tweetYear == year && tweetMonth == month && tweetDay == day) {
+             tweetsFiltered.add(tweet);
+             }
+             }
+             **/
 
-            int tweetYear = DateUtils.getYearFromDate(tweet.getDate());
-            int tweetMonth = DateUtils.getMonthFromDate(tweet.getDate());
-            int tweetDay = DateUtils.getDayFromDate(tweet.getDate());
+            Long[] tweetsKeys = allTweets.getKeysIfLong(allTweets.length());
+            for (int i = 0; i < tweetsKeys.length; i++) {
+                Tweet tweet = allTweets.get(tweetsKeys[i]);
 
-            if (tweetYear == year && tweetMonth == month && tweetDay == day) {
-                tweetsFiltered.add(tweet);
-            }
-        }
+                int tweetYear = DateUtils.getYearFromDate(tweet.getDate());
+                int tweetMonth = DateUtils.getMonthFromDate(tweet.getDate());
+                int tweetDay = DateUtils.getDayFromDate(tweet.getDate());
 
-        HashTable<String,Long> hashtags = new HashTable<>();
-
-        for (int i = 0; i < tweetsFiltered.length(); i++) {
-            //voy a cada tweet de los tweets filtrados
-            Tweet tweet = tweetsFiltered.get(i);
-            //Recorro la lista de hasthtags del tweet
-            for (int j = 0; j < tweet.getHashtags().length(); j++) {
-                //Me paro en cada Hashtag
-                Hashtag hashtag = tweet.getHashtags().get(j);
-                // Me pregunto si mi hashTable tiene ese hashtag
-                if(!hashtags.contains(hashtag.getTag())){
-                    //Lo agrego con Long=1 porque es la primera vez que aparece
-                    hashtags.put(hashtag.getTag(), 1L);
-                } else{
-                    Long amountRepeated = hashtags.get(hashtag.getTag());
-                    hashtags.remove(hashtag.getTag());
-                    hashtags.put(hashtag.getTag(), amountRepeated + 1);
+                if (tweetYear == year && tweetMonth == month && tweetDay == day) {
+                    tweetsFiltered.add(tweet);
                 }
             }
-        }
 
-        MaxHeap<Long, String> mostRepeatingHashtags = new MaxHeap<>();
-        LinkedList<String> hashtagKeys = hashtags.getKeys();
+            HashTable<String,Long> hashtags = new HashTable<>();
 
-        for (int i = 0; i < hashtagKeys.length(); i++) {
-            mostRepeatingHashtags.push(hashtags.get(hashtagKeys.get(i)), hashtagKeys.get(i));
-        }
+            for (int i = 0; i < tweetsFiltered.length(); i++) {
+                //voy a cada tweet de los tweets filtrados
+                Tweet tweet = tweetsFiltered.get(i);
+                //Recorro la lista de hasthtags del tweet
+                for (int j = 0; j < tweet.getHashtags().length(); j++) {
+                    //Me paro en cada Hashtag
+                    Hashtag hashtag = tweet.getHashtags().get(j);
+                    // Me pregunto si mi hashTable tiene ese hashtag
+                    if(!hashtags.contains(hashtag.getTag())){
+                        //Lo agrego con Long=1 porque es la primera vez que aparece
+                        hashtags.put(hashtag.getTag(), 1L);
+                    } else{
+                        Long amountRepeated = hashtags.get(hashtag.getTag());
+                        hashtags.remove(hashtag.getTag());
+                        hashtags.put(hashtag.getTag(), amountRepeated + 1);
+                    }
+                }
+            }
 
-        String mostRepeatingHashtag = mostRepeatingHashtags.pop();
+            MaxHeap<Long, String> mostRepeatingHashtags = new MaxHeap<>();
+            LinkedList<String> hashtagKeys = hashtags.getKeys();
 
-        if (mostRepeatingHashtag == null) {
-            System.out.println("No hubo hashtags en el dia dado.");
-        }
+            for (int i = 0; i < hashtagKeys.length(); i++) {
+                mostRepeatingHashtags.push(hashtags.get(hashtagKeys.get(i)), hashtagKeys.get(i));
+            }
 
-        if (mostRepeatingHashtag.equals("f1")) {
-            System.out.println("El hashtag que mas se repite en este dia es: " + mostRepeatingHashtags.pop());
+            String mostRepeatingHashtag = mostRepeatingHashtags.pop();
+
+            if (mostRepeatingHashtag == null) {
+                System.out.println("No hubo hashtags en el dia dado.");
+            } else if (mostRepeatingHashtag.equals("f1")) {
+                System.out.println("El hashtag que mas se repite en este dia es: " + mostRepeatingHashtags.pop());
+            } else {
+                System.out.println("El hashtag que mas se repite en este dia es: " + mostRepeatingHashtag);
+            }
         } else {
-            System.out.println("El hashtag que mas se repite en este dia es: " + mostRepeatingHashtag);
+            System.out.println("La fecha ingresada no tiene un formato valido.");
         }
 
         Long tiempoFinal=System.currentTimeMillis();
