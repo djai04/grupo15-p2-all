@@ -125,7 +125,7 @@ public class Queries {
         }
     }
 
-    public static void encontrarTweetSegunPalabra(HashTable<Long, Tweet> allTweets) {
+    public static void encontrarTweetSegunPalabra(HashTable<Long, Tweet> allTweets) throws InterruptedException {
         Long tiempoInicial= System.currentTimeMillis();
         Scanner scanner = new Scanner(System.in);
         System.out.print("Ingrese la palabra o frase a buscar: ");
@@ -143,6 +143,7 @@ public class Queries {
          **/
 
         Long[] tweetKeys = allTweets.getKeysIfLong(allTweets.length());
+
         for (int i = 0; i < tweetKeys.length; i++) {
             Tweet tweet = allTweets.get(tweetKeys[i]);
             if (tweet.getContent().toLowerCase().contains(phrase.toLowerCase())) {
