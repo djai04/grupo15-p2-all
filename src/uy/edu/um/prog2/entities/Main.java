@@ -18,10 +18,9 @@ public class Main {
         HashTable<String, User> userList = null;
         HashTable<Long, Tweet> tweetList = null;
         HashTable<Long, Driver> driverList = null;
-        HashTable<String, Hashtag> hashtagList = null;
 
+        System.out.println("Bienvenido al sistema de consultas de tweets!");
         do {
-            System.out.println("Bienvenido al sistema de consultas de tweets!");
             System.out.println("1. Cargar datos.");
             System.out.println("2. Realizar consultas.");
             System.out.println("3. Finalizar programa.");
@@ -37,8 +36,7 @@ public class Main {
                         userList = new HashTable<>(1000000);
                         tweetList = new HashTable<>(1000000);
                         driverList = new HashTable<>(50);
-                        hashtagList = new HashTable<>(1000000);
-                        LoadCSV.loadDataIntoList(userList, tweetList, driverList, hashtagList);
+                        LoadCSV.loadDataIntoList(userList, tweetList, driverList);
                         isDataLoaded = true;
                         System.out.println("Datos cargados con exito!");
                         sleep(1000);
@@ -117,8 +115,6 @@ public class Main {
                     System.out.println("Debe ingresar 1 o 2.");
             }
         } while (menuOption != "3");
-
-
 
     }
 }

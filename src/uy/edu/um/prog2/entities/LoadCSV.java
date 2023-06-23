@@ -19,7 +19,7 @@ public class LoadCSV {
 
     }
 
-    public static void loadDataIntoList(HashTable<String, User> allUsers, HashTable<Long, Tweet> allTweets, HashTable<Long, Driver> allDrivers, HashTable<String, Hashtag> allHashtags) throws IOException {
+    public static void loadDataIntoList(HashTable<String, User> allUsers, HashTable<Long, Tweet> allTweets, HashTable<Long, Driver> allDrivers) throws IOException {
         Long tiempoInicial= System.currentTimeMillis();
         // Create file
         File file =new File("dataset/drivers.txt");
@@ -89,20 +89,11 @@ public class LoadCSV {
                 Tweet currentTweet = new Tweet(tweetText, tweetSource, isRetweetBoolean, tweetDateObject, currentUser);
 
                 //  Validate tweetHashtags
-                //  Should be a linked list of type Hashtag
                 tweetHashtags = tweetHashtags.replace("[", "").replace("]", "").replace("'", "").replace(" ", "");
                 String[] tweetHashtagsInArray = tweetHashtags.split(",");
 
                 for (int i = 0; i < tweetHashtagsInArray.length; i++) {
                     Hashtag currentHashtag =  new Hashtag(tweetHashtagsInArray[i].toLowerCase());
-
-                    if (allHashtags.contains(currentHashtag.getTag())) {
-                        currentHashtag = allHashtags.get(currentHashtag.getTag());
-                        currentHashtag.getTweets().add(currentTweet);
-                    } else {
-                        currentHashtag.getTweets().add(currentTweet);
-                        allHashtags.put(currentHashtag.getTag(), currentHashtag);
-                    }
                     // Debemos argumentar en el readme
                     currentTweet.getHashtags().add(currentHashtag);
                 }

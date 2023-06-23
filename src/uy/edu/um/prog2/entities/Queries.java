@@ -5,6 +5,7 @@ import uy.edu.um.prog2.adt.heap.MaxHeap;
 import uy.edu.um.prog2.adt.linkedlist.LinkedList;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -161,55 +162,60 @@ public class Queries {
         System.out.println("Ingrese la fecha en formato YYYY-MM-DD: ");
         String givenDate = scanner.nextLine();
 
-        String[] elements = givenDate.split("-");
-        int year = Integer.parseInt(elements[0]);
-        int month = Integer.parseInt(elements[1]);
-        int day = Integer.parseInt(elements[2]);
+        if (DateUtils.isValidDate(givenDate)) {
+            String[] elements = givenDate.split("-");
+            int year = Integer.parseInt(elements[0]);
+            int month = Integer.parseInt(elements[1]);
+            int day = Integer.parseInt(elements[2]);
 
-        // Podria ser un hash
-        LinkedList<Tweet> tweetsFiltered = new LinkedList<>();
+            // Podria ser un hash
+            LinkedList<Tweet> tweetsFiltered = new LinkedList<>();
 
-        /**
-        LinkedList<Long> tweetKeys = allTweets.getKeys();
-        for (int i = 0; i < tweetKeys.length(); i++) {
-            Tweet tweet = allTweets.get(tweetKeys.get(i));
+            /**
+            LinkedList<Long> tweetKeys = allTweets.getKeys();
+            for (int i = 0; i < tweetKeys.length(); i++) {
+                Tweet tweet = allTweets.get(tweetKeys.get(i));
 
-            int tweetYear = DateUtils.getYearFromDate(tweet.getDate());
-            int tweetMonth = DateUtils.getMonthFromDate(tweet.getDate());
-            int tweetDay = DateUtils.getDayFromDate(tweet.getDate());
+                int tweetYear = DateUtils.getYearFromDate(tweet.getDate());
+                int tweetMonth = DateUtils.getMonthFromDate(tweet.getDate());
+                int tweetDay = DateUtils.getDayFromDate(tweet.getDate());
 
-            if (tweetYear == year && tweetMonth == month && tweetDay == day) {
-                tweetsFiltered.add(tweet);
-            }
-        }
-         **/
-
-        Long[] tweetsKeys = allTweets.getKeysIfLong(allTweets.length());
-        for (int i = 0; i < tweetsKeys.length; i++) {
-            Tweet tweet = allTweets.get(tweetsKeys[i]);
-
-            int tweetYear = DateUtils.getYearFromDate(tweet.getDate());
-            int tweetMonth = DateUtils.getMonthFromDate(tweet.getDate());
-            int tweetDay = DateUtils.getDayFromDate(tweet.getDate());
-
-            if (tweetYear == year && tweetMonth == month && tweetDay == day) {
-                tweetsFiltered.add(tweet);
-            }
-        }
-
-        LinkedList<Hashtag> filteredTweetsHashtags = new LinkedList<>();
-
-        for (int i = 0; i < tweetsFiltered.length(); i++) {
-            LinkedList<Hashtag> thisTweetHashtag = tweetsFiltered.get(i).getHashtags();
-
-            for (int j = 0; j < thisTweetHashtag.length(); j++) {
-                if (!filteredTweetsHashtags.isInList(thisTweetHashtag.get(j))) {
-                    filteredTweetsHashtags.add(thisTweetHashtag.get(j));
+                if (tweetYear == year && tweetMonth == month && tweetDay == day) {
+                    tweetsFiltered.add(tweet);
                 }
             }
+             **/
+
+            Long[] tweetsKeys = allTweets.getKeysIfLong(allTweets.length());
+            for (int i = 0; i < tweetsKeys.length; i++) {
+                Tweet tweet = allTweets.get(tweetsKeys[i]);
+
+                int tweetYear = DateUtils.getYearFromDate(tweet.getDate());
+                int tweetMonth = DateUtils.getMonthFromDate(tweet.getDate());
+                int tweetDay = DateUtils.getDayFromDate(tweet.getDate());
+
+                if (tweetYear == year && tweetMonth == month && tweetDay == day) {
+                    tweetsFiltered.add(tweet);
+                }
+            }
+
+            LinkedList<Hashtag> filteredTweetsHashtags = new LinkedList<>();
+
+            for (int i = 0; i < tweetsFiltered.length(); i++) {
+                LinkedList<Hashtag> thisTweetHashtag = tweetsFiltered.get(i).getHashtags();
+
+                for (int j = 0; j < thisTweetHashtag.length(); j++) {
+                    if (!filteredTweetsHashtags.isInList(thisTweetHashtag.get(j))) {
+                        filteredTweetsHashtags.add(thisTweetHashtag.get(j));
+                    }
+                }
+            }
+
+            System.out.println("La cantidad de hashtags distintos en el " + givenDate + " es: " + filteredTweetsHashtags.length());
+        } else {
+            System.out.println("La fecha ingresada no tiene un formato valido.");
         }
 
-        System.out.println("La cantidad de hashtags distintos en el " + givenDate + " es: " + filteredTweetsHashtags.length());
         Long tiempoFinal=System.currentTimeMillis();
         Long tiempoPasado= tiempoFinal-tiempoInicial;
         System.out.println(tiempoPasado);
