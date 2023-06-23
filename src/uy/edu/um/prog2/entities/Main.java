@@ -26,5 +26,7 @@ public class Main {
         Queries.hashtagMasUsadoParaUnDiaDado(tweetList);
         System.out.println("===== QUERY END =====");
 
+
+
     }
 }

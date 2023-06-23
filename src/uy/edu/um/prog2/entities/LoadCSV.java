@@ -20,6 +20,7 @@ public class LoadCSV {
     }
 
     public static void loadDataIntoList(HashTable<String, User> allUsers, HashTable<Long, Tweet> allTweets, HashTable<Long, Driver> allDrivers, HashTable<String, Hashtag> allHashtags) throws IOException {
+        Long tiempoInicial= System.currentTimeMillis();
         // Create file
         File file =new File("dataset/drivers.txt");
         Scanner scanner= new Scanner(file);
@@ -146,6 +147,9 @@ public class LoadCSV {
             }
         }
         System.out.println(amountOfRecordsSkipped);
+        Long tiempoFinal=System.currentTimeMillis();
+        Long tiempoPasado= tiempoFinal-tiempoInicial;
+        System.out.println(tiempoPasado);
 
     }
 

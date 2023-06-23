@@ -12,6 +12,8 @@ import static java.lang.Thread.sleep;
 
 public class Queries {
     public static void diezPilotosMasMencionados(HashTable<Long, Driver> allDrivers) {
+
+        Long tiempoInicial= System.currentTimeMillis();
         Scanner scanner = new Scanner(System.in);
         System.out.print("Ingrese el mes: ");
         int month = scanner.nextInt();
@@ -47,9 +49,13 @@ public class Queries {
             System.out.println(amountOfTweets);
             System.out.println();
         }
+        Long tiempoFinal=System.currentTimeMillis();
+        Long tiempoPasado= tiempoFinal-tiempoInicial;
+        System.out.println(tiempoPasado);
     }
 
     public static void quinceUsuariosConMasTweets(HashTable<String, User> allUsers) {
+        Long tiempoInicial= System.currentTimeMillis();
         MaxHeap<Integer,User> usersByTweets = new MaxHeap<>();
 
         /**
@@ -78,10 +84,16 @@ public class Queries {
             }
             System.out.println();
 
+
+
         }
+        Long tiempoFinal=System.currentTimeMillis();
+        Long tiempoPasado= tiempoFinal-tiempoInicial;
+        System.out.println(tiempoPasado);
     }
 
     public static void sieteCuentasConMasFavoritos(HashTable<String, User> allUsers) {
+        Long tiempoInicial= System.currentTimeMillis();
         MaxHeap<Double, User> usersByFavourites = new MaxHeap<>();
 
         /**
@@ -105,10 +117,15 @@ public class Queries {
             System.out.println("Username: " + topUserFavourite.getUsername());
             System.out.println("Amount of favourites: " + topUserFavourite.getAmountOfFavourites());
             System.out.println();
+
+            Long tiempoFinal=System.currentTimeMillis();
+            Long tiempoPasado= tiempoFinal-tiempoInicial;
+            System.out.println(tiempoPasado);
         }
     }
 
     public static void encontrarTweetSegunPalabra(HashTable<Long, Tweet> allTweets) {
+        Long tiempoInicial= System.currentTimeMillis();
         Scanner scanner = new Scanner(System.in);
         System.out.print("Ingrese la palabra o frase a buscar: ");
         String phrase = scanner.nextLine();
@@ -133,9 +150,13 @@ public class Queries {
         }
 
         System.out.println("La cantidad de tweets con esa palabra o frase es: " + counter);
+        Long tiempoFinal=System.currentTimeMillis();
+        Long tiempoPasado= tiempoFinal-tiempoInicial;
+        System.out.println(tiempoPasado);
     }
 
     public static void cantidadDeHashtagsDistintosParaUnDiaDado(HashTable<Long, Tweet> allTweets) {
+        Long tiempoInicial= System.currentTimeMillis();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Ingrese la fecha en formato YYYY-MM-DD: ");
         String givenDate = scanner.nextLine();
@@ -189,9 +210,13 @@ public class Queries {
         }
 
         System.out.println("La cantidad de hashtags distintos en el " + givenDate + " es: " + filteredTweetsHashtags.length());
+        Long tiempoFinal=System.currentTimeMillis();
+        Long tiempoPasado= tiempoFinal-tiempoInicial;
+        System.out.println(tiempoPasado);
     }
 
     public static void hashtagMasUsadoParaUnDiaDado(HashTable<Long, Tweet> allTweets) {
+        Long tiempoInicial= System.currentTimeMillis();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Ingrese la fecha en formato YYYY-MM-DD: ");
         String givenDate = scanner.nextLine();
@@ -270,6 +295,10 @@ public class Queries {
         } else {
             System.out.println("El hashtag que mas se repite en este dia es: " + mostRepeatingHashtag);
         }
+
+        Long tiempoFinal=System.currentTimeMillis();
+        Long tiempoPasado= tiempoFinal-tiempoInicial;
+        System.out.println(tiempoPasado);
 
     }
 
