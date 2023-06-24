@@ -24,8 +24,14 @@ public class DateUtils {
         calendar.setTime(date);
         return calendar.get(Calendar.DAY_OF_MONTH);
     }
+
     public static boolean isValidDate(String dateString) {
         String pattern = "^\\d{4}-\\d{2}-\\d{2}$";
+        return Pattern.matches(pattern, dateString);
+    }
+
+    public static boolean isValidYearMonth(String dateString) {
+        String pattern = "^\\d{4}-\\d{2}$";
         return Pattern.matches(pattern, dateString);
     }
 

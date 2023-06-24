@@ -16,39 +16,51 @@ public class Queries {
 
         Long tiempoInicial= System.currentTimeMillis();
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingrese el mes: ");
+        /**System.out.print("Ingrese el mes: ");
         int month = scanner.nextInt();
         System.out.print("Ingrese el año: ");
-        int year = scanner.nextInt();
-        MaxHeap<Integer,Driver> driversByMentions= new MaxHeap<>();
-        LinkedList<Long> driverKeys = allDrivers.getKeys();
+        int year = scanner.nextInt();**/
+        System.out.println("Ingrese la fecha en formato YYYY-MM: ");
+        String givenDate = scanner.nextLine();
 
-        for (int i = 0; i < driverKeys.length(); i++) {
-            Driver driver =allDrivers.get(driverKeys.get(i));
-            // Adding driver to heap using getTweetsMentioned´s size as key
-            LinkedList<Tweet> tweetsFiltered = new LinkedList<>();
-            for (int j = 0; j <driver.getTweetsMentioned().length() ; j++) {
-                Tweet tweetFiltered = driver.getTweetsMentioned().get(j);
-                int tweetMonth = DateUtils.getMonthFromDate(tweetFiltered.getDate());
-                int tweetYear = DateUtils.getYearFromDate(tweetFiltered.getDate());
+        if (DateUtils.isValidYearMonth(givenDate)) {
+            String[] elements = givenDate.split("-");
+            int year = Integer.parseInt(elements[0]);
+            int month = Integer.parseInt(elements[1]);
 
-                if(tweetMonth == month && tweetYear == year) {
-                    tweetsFiltered.add(tweetFiltered);
+            MaxHeap<Integer, Driver> driversByMentions = new MaxHeap<>();
+            LinkedList<Long> driverKeys = allDrivers.getKeys();
+
+            for (int i = 0; i < driverKeys.length(); i++) {
+                Driver driver = allDrivers.get(driverKeys.get(i));
+                // Adding driver to heap using getTweetsMentioned´s size as key
+                LinkedList<Tweet> tweetsFiltered = new LinkedList<>();
+                for (int j = 0; j < driver.getTweetsMentioned().length(); j++) {
+                    Tweet tweetFiltered = driver.getTweetsMentioned().get(j);
+                    int tweetMonth = DateUtils.getMonthFromDate(tweetFiltered.getDate());
+                    int tweetYear = DateUtils.getYearFromDate(tweetFiltered.getDate());
+
+                    if (tweetMonth == month && tweetYear == year) {
+                        tweetsFiltered.add(tweetFiltered);
+                    }
+                }
+                if (tweetsFiltered.length() != 0) {
+                    driversByMentions.push(tweetsFiltered.length(), driver);
+                    // System.out.println(tweetsFiltered.length());
                 }
             }
-            if (tweetsFiltered.length() != 0) {
-                driversByMentions.push(tweetsFiltered.length(), driver);
-                // System.out.println(tweetsFiltered.length());
-            }
-        }
 
-        for (int i = 0; i < 10; i++) {
-            int amountOfTweets = driversByMentions.peekKey();
-            Driver mostMentionedDriver = driversByMentions.pop();
-            System.out.println("===== DRIVER =====");
-            System.out.println(mostMentionedDriver.getDriverName());
-            System.out.println(amountOfTweets);
-            System.out.println();
+            for (int i = 0; i < 10; i++) {
+                int amountOfTweets = driversByMentions.peekKey();
+                Driver mostMentionedDriver = driversByMentions.pop();
+                System.out.println("===== DRIVER =====");
+                System.out.println(mostMentionedDriver.getDriverName());
+                System.out.println(amountOfTweets);
+                System.out.println();
+            }
+
+        } else {
+            System.out.println("La fecha ingresada no tiene un formato valido.");
         }
         Long tiempoFinal=System.currentTimeMillis();
         Long tiempoPasado= tiempoFinal-tiempoInicial;
