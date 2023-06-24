@@ -158,7 +158,7 @@ public class Queries {
 
         for (int i = 0; i < tweetKeys.length; i++) {
             Tweet tweet = allTweets.get(tweetKeys[i]);
-            if (tweet.getContent().toLowerCase().contains(phrase.toLowerCase())) {
+            if (tweet.getContent().contains(phrase)) {
                 counter++;
             }
         }
