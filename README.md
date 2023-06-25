@@ -1,6 +1,8 @@
 # Obligatorio P2 2023 - Anselmo, Carrasco
 ### Ejecucion del programa
 Para ejecutar el programa, simplemente se debe correr el main.
+Es importante que el archivo con los datos este bajo un directorio llamado dataset en la raiz del proyecto, al igual que el drivers.txt.
+**IMPORTANTE: Nuestro dataset (al igual que el de varios compañeros), tiene una columna extra al principio, que no sé si deberia aparecer. Esto podria generar un problema al cargar los datos si se usa un dataset que no la tenga, ya que quedarian todos los indice corridos 1 lugar. Tener en cuenta.**
 ## Decisiones tomadas
 - Clase Driver: Una de las decisiones mas importantes que tomamos es la de crear una nueva clase donde guardamos los pilotos, que tiene dos atributos.
 Uno es el nombre del piloto, y el otro es la lista de tweets que lo mencionan. Para conseguir este ultimo atributo correctamente, al realizar la carga de datos, vamos checkeando si cada tweet menciona al driver, y de ser asi, lo añadimos a la lista.
