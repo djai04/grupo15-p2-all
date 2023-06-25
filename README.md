@@ -1,4 +1,19 @@
 # Obligatorio P2 2023 - Anselmo, Carrasco
+## Decisiones tomadas
+- Clase Driver: Una de las decisiones mas importantes que tomamos es la de crear una nueva clase donde guardamos los pilotos, que tiene dos atributos.
+Uno es el nombre del piloto, y el otro es la lista de tweets que lo mencionan. Para conseguir este ultimo atributo correctamente, al realizar la carga de datos, vamos checkeando si cada tweet menciona al driver, y de ser asi, lo añadimos a la lista.
+- Estructuras de datos: En la mayoria de los casos donde teniamos que guardar una gran cantidad de datos, elegimos usar Hashtable.
+Esto se debe a que es O(1) en promedio al añadir y al buscar (y consiguientemente, el contains), por lo que resulta de mucha utilidad, ya que constantemente tenemos que estar viendo si un hash ya contiene o no un elemento.
+Para las listas que tenian una menor cantidad de elementos, decidimos usar linked list.
+  - Recorrer el Hash: Un gran  problema que enfrentamos, fue que al recorrer los hashes grandes, las funciones tomaban muchisimo tiempo. Luego de un poco de investigacion, averiguamos por que era asi.
+  Inicialmente, para recorrer el hash, usamos el metodo getKeys, que devolvia una linked list con todas las keys del hash, y luego la recorriamos para ir accediendo a cada elemento del hash.
+  El problema yacia en que el get en una linked list es de O(n), y en el caso de la lista de tweets lo estabamos haciendo para 600.000 elementos, lo que causaba que tuvieramos que recorrer 600.000! nodos. Para solucionar este cuello de botella, decidimos implementar funciones que no devolvieran las keys en una linked list, si no en un array normal de Java. Pero, como en Java no se permiten instanciar arrays genericos, recurrimos a crear funciones para cada tipo de dato de las keys que nos hacian falta (Long, String).
+- Minisculas (toLowerCase): Usamos la funcion toLowerCase en el caso del hashtag, esto porque en Twitter es exactamente lo mismo buscar segun un hashtag en mayuscula a un hashtag en minuscula.
+Tambien la estabamos usando en la consulta 6, pero descubrimos que consumia una enorme cantidad de memoria, ya que instanciaba un nuevo objeto de tipo String por cada iteracion del recorrido de la lista de tweets, entonces lo descartamos.
+- Claves: Tomamos el username de cada Tweet como unico, asi que esa es la clave de usuario.
+En el caso de tweet, creamos una ID autoincrement.
+En el caso de Hashtag, descartamos la opcion de hacer un ID autoincrement como lo planteaba el diagrama de clases inicial, y optamos por usar el nombre del hashtag (el tag) como la clave.
+
 ## Procesos de carga de datos
 Los metodos para la carga de datos se encuentran en una clase llamada LoadCSV, bajo el paquete entities.
 Para realizar la carga de datos, usamos la libreria de Apache Commons CSV, que instalamos el binario y luego instalamos, cada uno en nuestra computadora.

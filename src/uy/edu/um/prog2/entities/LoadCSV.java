@@ -94,7 +94,6 @@ public class LoadCSV {
 
                 for (int i = 0; i < tweetHashtagsInArray.length; i++) {
                     Hashtag currentHashtag =  new Hashtag(tweetHashtagsInArray[i].toLowerCase());
-                    // Debemos argumentar en el readme
                     currentTweet.getHashtags().add(currentHashtag);
                 }
 
