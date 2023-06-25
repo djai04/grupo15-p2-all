@@ -1,4 +1,6 @@
 # Obligatorio P2 2023 - Anselmo, Carrasco
+### Ejecucion del programa
+Para ejecutar el programa, simplemente se debe correr el main.
 ## Decisiones tomadas
 - Clase Driver: Una de las decisiones mas importantes que tomamos es la de crear una nueva clase donde guardamos los pilotos, que tiene dos atributos.
 Uno es el nombre del piloto, y el otro es la lista de tweets que lo mencionan. Para conseguir este ultimo atributo correctamente, al realizar la carga de datos, vamos checkeando si cada tweet menciona al driver, y de ser asi, lo añadimos a la lista.
