@@ -15,6 +15,7 @@ Tambien la estabamos usando en la consulta 6, pero descubrimos que consumia una 
 - Claves: Tomamos el username de cada Tweet como unico, asi que esa es la clave de usuario.
 En el caso de tweet, creamos una ID autoincrement.
 En el caso de Hashtag, descartamos la opcion de hacer un ID autoincrement como lo planteaba el diagrama de clases inicial, y optamos por usar el nombre del hashtag (el tag) como la clave.
+- Fechas: Chequeamos que la fecha sea de formato YYYY-MM-DD, pero no chequeamos que este necesariamente contenida dentro del dataset, por una cuestion de extensibilidad. Todas las funciones de manejo de fecha estan en la clase DateUtils.
 
 ## Procesos de carga de datos
 Los metodos para la carga de datos se encuentran en una clase llamada LoadCSV, bajo el paquete entities.
