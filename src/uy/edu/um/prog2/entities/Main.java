@@ -5,7 +5,6 @@ import uy.edu.um.prog2.adt.linkedlist.LinkedList;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 import static java.lang.Thread.sleep;
