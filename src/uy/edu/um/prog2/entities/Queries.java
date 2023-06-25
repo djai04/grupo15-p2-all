@@ -50,13 +50,17 @@ public class Queries {
                 }
             }
 
-            for (int i = 0; i < 10; i++) {
-                int amountOfTweets = driversByMentions.peekKey();
-                Driver mostMentionedDriver = driversByMentions.pop();
-                System.out.println("===== DRIVER =====");
-                System.out.println(mostMentionedDriver.getDriverName());
-                System.out.println(amountOfTweets);
-                System.out.println();
+            try {
+                for (int i = 0; i < 10; i++) {
+                    int amountOfTweets = driversByMentions.peekKey();
+                    Driver mostMentionedDriver = driversByMentions.pop();
+                    System.out.println("===== DRIVER =====");
+                    System.out.println(mostMentionedDriver.getDriverName());
+                    System.out.println(amountOfTweets);
+                    System.out.println();
+                }
+            } catch (Exception e) {
+                System.out.println("Hubo un error inesperado al realizar la consulta, probablemente que no haya tweets en la fecha.");
             }
 
         } else {
